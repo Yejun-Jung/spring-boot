@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -20,13 +21,13 @@ public class Member {
     private Long id;
     private String name;
     private String email;
-    private LocalDate createAt;
+    private LocalDateTime createAt;
 
 
     public Member(String name, String email) {
         this.name = name;
         this.email = email;
-        this.createAt = LocalDate.now();
+        this.createAt = LocalDateTime.now();
 
 
     }
