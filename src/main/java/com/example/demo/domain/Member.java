@@ -3,12 +3,9 @@ package com.example.demo.domain;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import lombok.Generated;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,22 +14,19 @@ import java.time.LocalDateTime;
 public class Member {
     @Id
     @GeneratedValue
-
     private Long id;
     private String name;
     private String email;
-    private LocalDateTime createAt;
-
+    private LocalDateTime createdAt;
 
     public Member(String name, String email) {
         this.name = name;
         this.email = email;
-        this.createAt = LocalDateTime.now();
-
-
+        this.createdAt = LocalDateTime.now();
     }
+
     public void update(String name, String email) {
-        if(name !=null) this.name = name;
-        if(email !=null) this.email = email;
+        if(name != null) this.name = name;
+        if(email != null) this.email = email;
     }
 }

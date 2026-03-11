@@ -12,13 +12,17 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional
 public class MemberService {
-
     public final MemberRepository memberRepository;
 
     public Long join(String name, String email){
-        Member member = new Member(name,email);
+        Member member = new Member(name, email);
         return memberRepository.save(member).getId();
+    }
 
+    @Transactional(readOnly = true)
+    public Member findById(Long id){
+        return  memberRepository.findById(id)
+                .orElseThrow(()->new IllegalArgumentException("Member not found:"+id));
     }
 
     @Transactional(readOnly = true)
@@ -27,17 +31,17 @@ public class MemberService {
     }
 
     @Transactional
-    public Member update(Long id, String name, String email) {
+    public Member update(Long id, String name, String email){
         Member member = memberRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Member not found: " + id));
+                .orElseThrow(()->new IllegalArgumentException("Member not found"+id));
 
-        member.update(name, email);
+        member.update(name,email);
         return member;
     }
 
-    public void delete(Long id) {
-        if (!memberRepository.existsById(id)) {
-            throw new IllegalArgumentException("Member not found: " + id);
+    public void delete(Long id){
+        if(!memberRepository.existsById(id)){
+            throw new IllegalArgumentException("Member not found"+id);
         }
         memberRepository.deleteById(id);
     }
